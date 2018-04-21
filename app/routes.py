@@ -76,7 +76,7 @@ def your_view():
             print (db.session.add(u))
             print (db.session.commit())
             print (u.key)
-            link = request.base_url.replace("send","")+"id/{}".format(u.key)
+            link = "https://mta-it.herokuapp.com/"+"id/{}".format(u.key)
             send_email("Approval request","2402rishi@gmail.com",["rda311@nyu.edu"],"Please aprrove the form \n {}".format(link),"")
             return redirect(url_for("index"),code=302)
         elif request.form['button_value'] == unicode("manager"):
