@@ -46,7 +46,7 @@ def your_view():
     if request.method == 'POST':
         print (request.form)
         print ("in here")
-        if request.form['button_value'] == unicode("user"):
+        if request.form['button_value'] == str("user"):
             print ("Hello User")
             u = User(coordinator = request.form["coordinator"], \
                  user_req = request.form["user_req"], \
@@ -79,7 +79,7 @@ def your_view():
             link = "https://mta-it.herokuapp.com/"+"id/{}".format(u.key)
             send_email("Approval request","2402rishi@gmail.com",["rda311@nyu.edu"],"Please aprrove the form \n {}".format(link),"")
             return redirect(url_for("index"),code=302)
-        elif request.form['button_value'] == unicode("manager"):
+        elif request.form['button_value'] == str("manager"):
             print("Manager")
             u = User.query.filter_by(key=int(str(request.form["key"]))).first()
             send_email("Approval request","2402rishi@gmail.com",[u.email,"rishi.agarwal@nyct.com"],"your request has been approved","")
