@@ -82,7 +82,7 @@ def your_view():
         elif request.form['button_value'] == str("manager"):
             print("Manager")
             u = User.query.filter_by(key=int(str(request.form["key"]))).first()
-            send_email("Approval request","2402rishi@gmail.com",[u.email,"rishi.agarwal@nyct.com"],"your request has been approved","")
+            send_email("Approval request","rishi.agarwal@nyct.com",[u.email,"rishi.agarwal@nyct.com"],"your request has been approved","")
             u.approval=True
             db.session.commit()
             return redirect(url_for('reset'),code=302)
