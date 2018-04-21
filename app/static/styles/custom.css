@@ -1,0 +1,23 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+h1{
+	color: blue;
+    margin-bottom: 40px;
+}
+label {
+    color: #333;
+}
+.btn-send {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
+.section {
+	color: white;
+	background-color: DodgerBlue;
+    width: 750px;
+}
+ 

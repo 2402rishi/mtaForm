@@ -1,0 +1,411 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ url_for('static',filename='styles/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static',filename='styles/font') }}" rel='stylesheet' type='text/css'>
+        <link href='{{ url_for('static',filename='styles/custom.css') }}' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <h1>New York City Transit</a></h1>
+                    <h3><center>EMD - Command Center Operations</center></h3>
+					<h3><center>Telephone Service Planning and Installation Form</center></h3>
+					<br>
+					<br>
+                    <form id="contact-form" method="post" action="http://localhost:5000/send" role="form">
+
+                        <div class="messages"></div>
+
+                        <div class="controls">
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="COORDINATOR">COORDINATOR</label>
+                                        {%if user and user.coordinator %}
+                                            <select class = "form-control" disabled="disabled">
+                                                <Option value= {{ user.coordinator }}>{{ user.coordinator }} </Option>
+                                            </select>
+                                        {% else %}
+                                            <select id="COORDINATOR" name="coordinator" class="form-control">
+                                            <Option value="1">1</option>
+                                            <Option value="2">2</option>
+                                            <Option value="3">3</option>
+                                            <Option value="4">4</option>
+                                            <Option value="5">5</option>
+                                            <Option value="6">6</option>
+                                            <Option value="7">7</option>
+                                        </select>
+                                        {% endif %}
+                                    </div>								
+                                </div>							
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="USER REQUEST NUMBER">USER REQUEST NUMBER</label>
+                                        {%if user and user.user_req %}
+                                            <input name = "user_req" disabled="disabled" value={{ user.user_req }} class="form-control"> 
+                                            {% else %}
+                                                <input name = "user_req" id="USER REQUEST NUMBER" type="number" class="form-control" required="required">
+                                        {% endif %}
+
+                                    </div>
+                                </div>							
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="SITE CODE">SITE CODE</label>
+                                        {% if user %}
+                                            <input name= "site_code" id="SITE CODE" value= "{{user.site_code}}" disabled="disabled"class="form-control">
+                                        {% else %}
+                                            <input name= "site_code" id="SITE CODE" type="text" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+							
+							<!-- Service Request -->
+							<legend>Service Request</legend>
+							<div class="row">							
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="SUBMITTED DATE">SUBMITTED DATE</label>
+                                        {% if user %}
+                                            <input name= "submit_date" disabled="disabled" value= {{user.submit_date}} class="form-control">
+                                        {% else %}
+                                            <input name= "submit_date" id="SUBMITTED DATE" type="date" class="form-control" required="required">
+                                        {% endif %}
+                                    </div>								
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="DUE DATE">DESIRED DUE DATE</label>
+                                        {% if user %}
+                                            <input value={{user.due_date}} disabled="disabled" class="form-control">
+                                        {% else %}
+                                            <input name ="due_date" id="DUE DATE" type="date" class="form-control" required="required">
+                                        {% endif %}
+                                    </div>
+                                </div>
+								<div class="col-md-2">
+								</div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="INSTALL">INSTALL</label>
+                                        {% if user %}
+                                            {% if user.install==1 %}
+                                                <input type="checkbox" disabled= "true" checked="true" class="form-control">
+                                            {% else %}
+                                                <input type="checkbox" disabled= "true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="install" id="INSTALL" type="checkbox" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="CHANGE">CHANGE</label>
+                                        {% if user %}
+                                            {% if user.change==1 %}
+                                                <input type="checkbox" disabled= "true" checked="true" class="form-control">
+                                            {% else %}
+                                                <input type="checkbox" disabled= "true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="change" id="change" type="checkbox" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="MOVE">MOVE</label>
+                                        {% if user %}
+                                            {% if user.move==1 %}
+                                                <input type="checkbox" disabled= "true" checked="true" class="form-control">
+                                            {% else %}
+                                                <input type="checkbox" disabled= "true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="move" id="move" type="checkbox" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>								
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="DISCONNECT">DISCONNECT</label>
+                                        {% if user %}
+                                            {% if user.disconnect==1 %}
+                                                <input type="checkbox" disabled= "true" checked="true" class="form-control">
+                                            {% else %}
+                                                <input type="checkbox" disabled= "true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="disconnect" id="disconnect" type="checkbox" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>	
+                            </div>
+							
+							<!--REQUESTOR INFORMATION-->
+							<legend>REQUESTOR INFORMATION</legend>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_NAME">NAME</label>
+                                        {% if user %}
+                                            {%if user.requestor_name %}
+                                                <input class="form-control" value= "{{user.requestor_name}}" disabled="disabled">
+                                            {% else %}
+                                                <input class="form-control" disabled="disabled">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="requestor_name" id="REQUESTOR_NAME" type="name" class="form-control" placeholder="Please enter your Name" required="required">
+                                        {% endif %}
+                                    </div>								
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_EMAIL">EMAIL*</label>
+                                        {% if user %}
+                                            {% if user.email %}
+                                                <input class="form-control" value={{ user.email }} disabled="disabled">
+                                            {% else %}
+                                                <input class="form-control" disabled="disabled">
+                                            {% endif %}
+                                        {% else %}    
+                                            <input name="email" id="REQUESTOR_EMAIL" type="email" class="form-control" required="required" placeholder="Please enter your Email" required="required" >
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_PHONE">TELEPHONE</label>
+                                        {% if user %}
+                                            {% if user.telephone %}
+                                                <input disabled="disabled" value={{ user.telephone }} class="form-control">
+                                            {% else %}
+                                                <input disabled="disabled" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="telephone" id="telephone" type="tel" class="form-control">
+                                        {% endif %}
+                                            
+                                        
+                                    </div>
+                                </div>								
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_DEPARTMENT">DEPARTMENT</label>
+                                        {% if user %}
+                                            {% if user.department %}
+                                                <input disabled="true" value="{{user.department}}" class="form-control">    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="department" id="department" type="text" class="form-control">
+                                        {% endif %}
+                                    </div>								
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_DIVISION">DIVISION</label>
+                                        {% if user %}
+                                            {% if user.division %}
+                                                <input disabled="true" value= "{{user.division}}" class="form-control">    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="division" id="division" type="text" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_RC">RC</label>
+                                        {% if user %}
+                                            {% if user.rc %}
+                                                <input disabled="true" value= "{{user.rc}}" class="form-control">    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="rc" id="REQUESTOR_RC" type="text" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>								
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_ADDRESS">ADDRESS</label>
+                                        {% if user %}
+                                            {% if user.address %}
+                                                <input disabled="true" value= "{{user.address}}" class="form-control">    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="address" id="REQUESTOR_ADDRESS" type="text" class="form-control">
+                                        {% endif %}
+                                    </div>								
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_FLOOR">FLOOR</label>
+                                        {% if user %}
+                                            {% if user.floor %}
+                                                <input disabled="true" value={{ user.floor }} class="form-control">    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="floor" id="REQUESTOR_FLOOR" type="number" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_CUBICLE">ROOM/CUBICLE</label>
+                                        {% if user %}
+                                            {% if user.room %}
+                                                <input disabled="true" value= "{{user.room}}" class="form-control">    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="room" id="REQUESTOR_CUBICLE" type="text" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="REQUESTOR_BUILDING">BUILDING/DEPOT</label>
+                                        {% if user %}
+                                            {% if user.depot %}
+                                                <input disabled="true" value= "{{user.depot}}" class="form-control">    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="depot" id="REQUESTOR_BUILDING type="text" class="form-control">
+                                        {% endif %}
+                                    </div>
+                                </div>								
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="DESCRIPTION">DESCRIPTION OF SERVICE REQUESTED *</label>
+                                        {% if user %}
+                                            {% if user.description %}
+                                                <textarea class="form-control" rows="12" disabled="disabled">{{ user.description }}</textarea>    
+                                            {% else %}
+                                                <textarea disabled="true" class="form-control" rows="12"></textarea> 
+                                            {% endif %}
+                                        {% else %}
+                                            <textarea name="description" id="DESCRIPTION" class="form-control" placeholder="WHEN POSSIBLE Include Telephone jack, Site contact if different from requestor." rows="12" required="required" data-error="Please,leave us a message."></textarea>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+							
+							<!-- Approval Manager Information -->
+							<legend>Approval Manager Information</legend>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="MANAGER'S APPROVAL">MANAGER'S APPROVAL</label>
+                                        {% if user %}
+                                            {% if user.manager_name %}
+                                                <input disabled="true" class="form-control" value = "{{user.manager_name}}">
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="manager_name" id="MANAGER'S APPROVAL" type="name" required="required" class="form-control" placeholder=" Manager (First and Last Name)">
+                                        {% endif %}
+                                        <div class="help-block with-errors"></div>
+                                    </div>								
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="MANAGER TITLE">MANAGER TITLE</label>
+                                        {% if user %}
+                                            {% if user.manager_title %}
+
+                                                <input disabled="true" class="form-control" value= "{{user.manager_title}}" >    
+                                            {% else %}
+                                                <input disabled="true" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                            <input name="manager_title" id="MANAGER TITLE" type="text" class="form-control">
+                                        {% endif %}
+                                        
+                                    </div>
+                                </div>
+								<div class="col-md-1">
+								</div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        {% if user %}
+                                            {% if user.approval %}
+                                                <label for="APPROVAL">APPROVAL</label>
+                                                <input type="checkbox" class="form-control" checked = "true" disabled="true">
+                                            {% else %}
+                                                <label for="APPROVAL">APPROVAL</label>
+                                                <input name="approval" id="APPROVAL" type="checkbox" required="required" class="form-control">
+                                            {% endif %}
+                                        {% else %}
+                                        {% endif %}
+                                    </div>
+                                </div>								
+                            </div>
+
+							<!--Submit -->
+							
+							<div class="row">
+								<div class="col-md-10">
+								</div>
+                                <div class="col-md-2">                                	
+                                    {% if user %}
+                                        {% if user.approval %}
+                                        {% else %}
+                                            <input type="hidden" name="button_value" value="manager">
+                                            <input type="hidden" name="key" value="{{user.key}}">
+                                            <input name="submit_manager" type="submit" id="manager" class="btn btn-success btn-send" value="Send Form">
+                                        {% endif %}
+                                    {% else %}
+                                    	<input type="hidden" name="button_value" value="user">	
+                                        <input  name="submit_user" type="submit" id="user" class="btn btn-success btn-send" value="Send Form">
+                                    {% endif %}
+                                </div>	
+							<div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <center><p class="text-muted">FINAL APPROVAL OF SERVICE REQUESTED IS BY TELECOMMUNICATIONS GROUP</p></center></center>									
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div><!-- /.8 -->
+
+            </div> <!-- /.row-->
+
+        </div> <!-- /.container-->
+
+        <script src="{{url_for('static', filename='javascript/jquery-1.12.0.min.js')}}"></script>
+        <script src="{{url_for('static', filename='javascript/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static', filename='javascript/validator.js')}}"></script>
+        <script src="{{url_for('static', filename='javascript/contact-2.js')}}"></script>
+    </body>
+</html>
